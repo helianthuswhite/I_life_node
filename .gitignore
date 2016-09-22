@@ -1,3 +1,2 @@
-# 将node的包在git上传中屏蔽掉
 
-/node_module/
+/node_modules/
