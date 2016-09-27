@@ -8,19 +8,24 @@ try {
   var timer = setInterval(function() {
     camera.read(function(err, im) {
       if (err) throw err;
-      console.log(im.size());
+      // console.log(im.size());
 
       if (im.size()[0] > 0 && im.size()[1] > 0){
         window.show(im);
       }
 
-      if (window.blockingWaitKey(20) == 27) {
-        im.save('./Node_Opencv/camera.jpg');
-        console.log('图像以保存');
-        clearInterval(timer);
-        return;
-      }
+      var codeKey = window.blockingWaitKey(20);
 
+      console.log(codeKey);
+
+      if (codeKey == 13) {
+        im.save('./Node_Opencv/camera.jpg');
+        console.log('图像以保存!');
+      } else if (codeKey == 27) {
+        console.log('即将退出程序!');
+        clearInterval(timer);
+        process.abort();
+      }
     });
   },20);
   
