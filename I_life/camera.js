@@ -2,7 +2,7 @@
 var cv = require('opencv');
 
 var Camera = {
-  run:function(image_url) {
+  run:function(image_url,callback) {
     try {
       //打开摄像头
       var camera = new cv.VideoCapture(0);
@@ -18,12 +18,12 @@ var Camera = {
           }
           // 获取窗体下的按键
           var codeKey = window.blockingWaitKey(20);
-
           console.log(codeKey);
           // 如果按下回车键就保存图像，如果是ESC键就退出
           if (codeKey == 13) {
-            im.save(image_url);
+            im.save(__dirname + '/' + image_url);
             console.log('图像以保存!');
+            callback();
           } else if (codeKey == 27) {
             console.log('即将退出程序!');
             // 清除定时器并杀死所有进程
