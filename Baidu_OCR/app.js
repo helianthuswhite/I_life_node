@@ -8,12 +8,16 @@ var ak = 'd58c39dfc3b849b6ba5b0faaebba41ff';
 var sk = '2d1e453feb5d4f5c919531031885fc85';
 var ocr = require('baidu-ocr-api').create(ak,sk);
 
+var startTime = (new Date()).getTime();
+
 // 外部图片
 ocr.scan({
-  url:'/Users/W_littlewhite/Documents/Git/Node_Opencv/Camera/test_img3.png', // 支持本地路径
-  type:'text',
+  	url:__dirname + '/real_img2s_min.jpg', // 支持本地路径
+  	type:'text',
 }).then(function (result) {
-  return console.log(result)
+	var endTime = (new Date()).getTime();
+  	console.log(result.results.words + '\n');
+  	console.log(endTime - startTime);
 }).catch(function (err) {
-  console.log('err', err);
+  	console.log('err', err);
 })
