@@ -1,7 +1,7 @@
 
 //获取到创建进程的方法
 const spawn = require('child_process').spawn;
-const ls = spawn('java', ['-jar', '/Users/W_littlewhite/Documents/Git/Node_Opencv/Node_Jar/test.jar']);
+const ls = spawn('java', ['-jar', '/Users/W_littlewhite/Documents/Git/Node_tools/Node_Jar/test.jar']);
 
 ls.stdout.on('data', (data) => {
   console.log(`stdout: ${data}`);

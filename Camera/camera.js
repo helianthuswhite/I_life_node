@@ -20,7 +20,7 @@ try {
       console.log(codeKey);
       // 如果按下回车键就保存图像，如果是ESC键就退出
       if (codeKey == 13) {
-        im.save('./Node_Opencv/Camera/camera.png');
+        im.save('./Node_tools/Camera/camera.png');
         console.log('图像以保存!');
       } else if (codeKey == 27) {
         console.log('即将退出程序!');
