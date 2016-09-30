@@ -19,4 +19,4 @@ var TinyImage = {
 
 module.exports = TinyImage;
 
-TinyImage.execute(IMAGE_URL,IMAGE_MIN_URL);
+// TinyImage.execute(IMAGE_URL,IMAGE_MIN_URL);

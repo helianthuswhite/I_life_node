@@ -4,15 +4,15 @@
 https://console.bce.baidu.com/iam/#/iam/accesslist
 
 **/
-var ak = 'd58c39dfc3b849b6ba5b0faaebba41ff';
-var sk = '2d1e453feb5d4f5c919531031885fc85';
+var ak = '729162badbc5401ea84641dec32edc07';
+var sk = '98c544cfaa9c4a16bdee1cc0bccfcd33';
 var ocr = require('baidu-ocr-api').create(ak,sk);
 
 var startTime = (new Date()).getTime();
 
 // 外部图片
 ocr.scan({
-  	url:__dirname + '/camera_min.png', // 支持本地路径
+  	url:__dirname + '/real_img2s_min.jpg', // 支持本地路径
   	type:'text',
 }).then(function (result) {
 	var endTime = (new Date()).getTime();

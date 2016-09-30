@@ -21,9 +21,8 @@ var Camera = {
           console.log(codeKey);
           // 如果按下回车键就保存图像，如果是ESC键就退出
           if (codeKey == 13) {
-            im.save(__dirname + '/' + image_url);
+            im.save(__dirname + '/' + image_url,callback);
             console.log('图像以保存!');
-            callback();
           } else if (codeKey == 27) {
             console.log('即将退出程序!');
             // 清除定时器并杀死所有进程
