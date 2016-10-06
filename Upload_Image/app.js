@@ -17,18 +17,18 @@ app.post('/upload', function(req, res) {
 
 	form.parse(req, function(err, fields, files) {
 
-	    if (err) {
-	      res.locals.error = err;
-	      return;		
-	    }  
+	    // if (err) {
+	    //   res.locals.error = err;
+	    //   return;		
+	    // }  
 
-	    var newPath = form.uploadDir + '.jpg';
+	    // var newPath = form.uploadDir + '.jpg';
 
-	    console.log(newPath);
-	    fs.renameSync(files.fulAvatar.path, newPath);  //重命名
+	    // console.log(newPath);
+	    // fs.renameSync(files.fulAvatar.path, newPath);  //重命名
 	});
 
-  	res.locals.success = '上传成功';
+  	res.send('上传成功');
 });
 
 //服务器启动
