@@ -12,7 +12,7 @@ var startTime = (new Date()).getTime();
 
 // 外部图片
 ocr.scan({
-  	url:__dirname + '/real_img2s_min.jpg', // 支持本地路径
+  	url:__dirname + '/1_min.jpg', // 支持本地路径
   	type:'text',
 }).then(function (result) {
 	var endTime = (new Date()).getTime();
