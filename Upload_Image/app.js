@@ -21,33 +21,11 @@ app.post('/upload', function(req, res) {
 	      res.locals.error = err;
 	      return;		
 	    }  
-     
-    	var extName = '';  //后缀名
-	    switch (files.fulAvatar.type) {
-	      case 'image/pjpeg':
-	        extName = 'jpg';
-	        break;
-	      case 'image/jpeg':
-	        extName = 'jpg';
-	        break;		 
-	      case 'image/png':
-	        extName = 'png';
-	        break;
-	      case 'image/x-png':
-	        extName = 'png';
-	        break;		 
-	    }
 
-	    if(extName.length == 0){
-	        res.locals.error = '只支持png和jpg格式图片';
-	        return;				   
-	    }
-
-	    var avatarName = Math.random() + '.' + extName;
-	    var newPath = form.uploadDir + avatarName;
+	    var newPath = form.uploadDir + '.jpg';
 
 	    console.log(newPath);
-	    fs.renameSync(files.fulAvatar.path, newPath);  //重命名
+	    // fs.renameSync(files.fulAvatar.path, newPath);  //重命名
 	});
 
   	res.locals.success = '上传成功';
