@@ -25,11 +25,11 @@ app.post('/upload', function(req, res) {
 		console.log("parsing done");
 		// var types = files.upload.name.split('.'); //将文件名以.分隔，取得数组最后一项作为文件后缀名。
 
-	    fs.renameSync(files.upload.path, __dirname + Imagename);
+	    fs.rename(files.upload.path, __dirname + Imagename,function(){
+	    	res.send('上传成功');
+	    });
 
 	});
-
-  	res.send('上传成功');
 });
 
 //服务器启动
