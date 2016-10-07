@@ -16,16 +16,9 @@ app.post('/upload', function(req, res) {
     form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
 
 	form.parse(req, function(err, fields, files) {
-
-	    // if (err) {
-	    //   res.locals.error = err;
-	    //   return;		
-	    // }  
-
-	    // var newPath = form.uploadDir + '.jpg';
-
-	    // console.log(newPath);
-	    // fs.renameSync(files.fulAvatar.path, newPath);  //重命名
+		if (err) {
+			console.log(err);
+		}
 	});
 
   	res.send('上传成功');
