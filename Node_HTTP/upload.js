@@ -4,7 +4,7 @@ var fs = require('fs');
 function upload(args){
     var boundaryKey = '----' + new Date().getTime();
     var options = {
-        host:'127.0.0.1',//远端服务器域名
+        host:'192.168.1.247',//远端服务器域名
         port:2333,//远端服务器端口号
         method:'POST',
         path:'/upload',//上传服务路径

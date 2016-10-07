@@ -2,6 +2,9 @@
 var express = require('express');
 var app = express();
 var formidable = require('formidable');
+var fs = require('fs');
+
+var Imagename = '/1.jpg';
 
 app.get('/',function (req,res) {
 	res.sendFile(__dirname + '/index.html');
@@ -13,12 +16,17 @@ app.post('/upload', function(req, res) {
     form.encoding = 'utf-8';		//设置编辑
     form.uploadDir = __dirname;	 //设置上传目录
     form.keepExtensions = true;	 //保留后缀
-    form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
+    form.maxFieldsSize = 4 * 1024 * 1024;   //文件大小
 
 	form.parse(req, function(err, fields, files) {
 		if (err) {
 			console.log(err);
 		}
+		console.log("parsing done");
+		// var types = files.upload.name.split('.'); //将文件名以.分隔，取得数组最后一项作为文件后缀名。
+
+	    fs.renameSync(files.upload.path, __dirname + Imagename);
+
 	});
 
   	res.send('上传成功');
