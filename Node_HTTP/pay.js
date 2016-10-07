@@ -1,69 +1,80 @@
-var http = require('http');
+
+var path = require('path');
 var fs = require('fs');
+var http = require('http');
+ 
+function postFile(fileKeyValue, req) {
 
-function epay(params){
+  	var boundaryKey = Math.random().toString(16);
+  	var enddata = '\r\n----' + boundaryKey + '--';
+ 
+   	var content = "\r\n----" + boundaryKey + "\r\n" + 
+	   	"Content-Type: application/octet-stream\r\n" + 
+	   	"Content-Disposition: form-data; name=\"" + fileKeyValue.name +
+	   	"\"; filename=\"" + path.basename(fileKeyValue.url) + 
+	   	"\"\r\n" + "Content-Transfer-Encoding: binary\r\n\r\n";
 
-	var boundaryKey = '----' + new Date().getTime();
+   	var contentBinary = new Buffer(content, 'utf-8');
 
-	var options = { 
-		host: '127.0.0.1', 
-		port: 2333,
-		path: '/upload',
-		method: 'post',
-		headers: {
-			'Content-Type':'multipart/form-data; boundary=' + boundaryKey,
-			'Content-Length':params.length,
-			'Connection':'keep-alive'
-		}
-	};
+   	var file = {
+   		contentBinary: contentBinary, 
+   		filePath: fileKeyValue.url
+   	}
 
-	//使用http 发送
-	var req = http.request(options, function(res) {
-		console.log('STATUS: ' + res.statusCode);
-		console.log('HEADERS: ' + JSON.stringify(res.headers));
+   	var contentLength = 0; 
 
-		//设置字符编码
-		res.setEncoding('utf8');
+	var stat = fs.statSync(file.filePath);
 
-		//返回数据流
-		var _data="";
+   	contentLength += file.contentBinary.length;
 
-		//数据
-		res.on('data', function (chunk) {
-			_data+=chunk;
-			console.log('BODY: ' + chunk);
-		});
+   	contentLength += stat.size;
+ 
+  	req.setHeader('Content-Type', 'multipart/form-data; boundary=--' + boundaryKey);
+  	req.setHeader('Content-Length', contentLength + Buffer.byteLength(enddata));
 
-		// 结束回调
-		res.on('end', function(){
-			console.log("REBOAK:",_data)
-		});
+  	console.log(file);
 
-		//错误回调 // 这个必须有。 不然会有不少 麻烦
-		req.on('error', function(e) {
-			console.log('problem with request: ' + e.message);
-		});
+	var doOneFile = function(){
 
-	});
+	   	req.write(file.contentBinary);
 
-	req.write(
-        '–' + boundaryKey + '\r\n' +
-        'Content-Disposition: form-data; name="upload"; filename="'+ params +'"\r\n' +
-        'Content-Type: application/x-jpg\r\n\r\n'
-    );
+	   	var fileStream = fs.createReadStream(file.filePath, {bufferSize : 4 * 1024});
+	   	
+	   	fileStream.pipe(req, {end: false});
+	   	
+	   	fileStream.on('end', function() {
+	      	req.end(enddata);
+	   	});
 
-	//设置1M的缓冲区
-	console.log(params);
-    var fileStream = fs.createReadStream(params,{bufferSize:1024 * 1024});
-
-    fileStream.pipe(req,{end:false});
-
-    fileStream.on('end',function(){
-
-        req.end('\r\n–' + boundaryKey + '–');
-
-    });
-
+	    req.end(enddata);
+	}      
 }
-exports.epay=epay;
+ 
+var files = {
+ 	name: "image", 
+ 	url: "/Users/W_littlewhite/Downloads/2.jpg"
+}
 
+var options = { 
+ 	host: "localhost", 
+ 	port: "2333" , 
+ 	method: "POST", 
+ 	path: "/upload"
+}
+ 
+var req = http.request(options, function(res){
+ 	console.log('STATUS: ' + res.statusCode);
+ 	console.log('HEADERS: ' + JSON.stringify(res.headers));
+ 	res.on("data", function(chunk){
+  		console.log("BODY:" + chunk);
+ 	});
+});
+ 
+req.on('error', function(e){
+ 	console.log('problem with request:' + e.message);
+ 	console.log(e);
+});
+
+postFile(files, req);
+
+console.log("done");
