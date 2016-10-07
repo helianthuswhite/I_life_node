@@ -1,10 +1,9 @@
 var http = require('http');
+var fs = require('fs');
 
 function epay(params){
 
-	console.log(" COME IN"); 
-	var params = JSON.stringify({ 
-	"sign":"ExdYcut6LgrKGsHuAyoxFTMDuDYVmyFFu7GRHPRwB/DBwm6cyBe9Sr2rti1/SjWPcdXLoWIHWEJ9IFKPK+3ieKU/MkNqeh1opH/4MEM59W314jQL3/sPS+X8qsEInj7OsfXCfOKXJXTw+WeVBOBHep4SBIAkgLjvRYSg1/Bv7ck="});
+	var boundaryKey = '----' + new Date().getTime();
 
 	var options = { 
 		host: '127.0.0.1', 
@@ -12,15 +11,16 @@ function epay(params){
 		path: '/upload',
 		method: 'post',
 		headers: {
-		'Content-Type':'application/x-www-form-urlencoded',
-		'Content-Length':params.length
-	}};
+			'Content-Type':'multipart/form-data; boundary=' + boundaryKey,
+			'Content-Length':params.length,
+			'Connection':'keep-alive'
+		}
+	};
 
 	//使用http 发送
 	var req = http.request(options, function(res) {
 		console.log('STATUS: ' + res.statusCode);
 		console.log('HEADERS: ' + JSON.stringify(res.headers));
-
 
 		//设置字符编码
 		res.setEncoding('utf8');
@@ -46,8 +46,23 @@ function epay(params){
 
 	});
 
-	req.write(params + "\n");
-	req.end();
+	req.write(
+        '–' + boundaryKey + '\r\n' +
+        'Content-Disposition: form-data; name="upload"; filename="'+ params +'"\r\n' +
+        'Content-Type: application/x-jpg\r\n\r\n'
+    );
+
+	//设置1M的缓冲区
+	console.log(params);
+    var fileStream = fs.createReadStream(params,{bufferSize:1024 * 1024});
+
+    fileStream.pipe(req,{end:false});
+
+    fileStream.on('end',function(){
+
+        req.end('\r\n–' + boundaryKey + '–');
+
+    });
 
 }
 exports.epay=epay;
