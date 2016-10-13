@@ -4,10 +4,10 @@ var app = express();
 var formidable = require('formidable');
 var fs = require('fs');
 
-var Imagename = '/1.jpg';
+var filename = '/words.txt';
 
 app.get('/',function (req,res) {
-	res.sendFile(__dirname + '/index.html');
+	console.log('请求不合法.');
 });
 
 app.post('/upload', function(req, res) {
@@ -25,7 +25,7 @@ app.post('/upload', function(req, res) {
 		console.log("parsing done");
 		// var types = files.upload.name.split('.'); //将文件名以.分隔，取得数组最后一项作为文件后缀名。
 
-	    fs.rename(files.upload.path, __dirname + Imagename,function(){
+	    fs.rename(files.upload.path, __dirname + filename,function(){
 	    	res.send('上传成功');
 	    });
 

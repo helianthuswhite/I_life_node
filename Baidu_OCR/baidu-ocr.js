@@ -12,12 +12,12 @@ var startTime = (new Date()).getTime();
 
 // 外部图片
 ocr.scan({
-  	url:__dirname + '/photo_min.jpg', // 支持本地路径
+  	url:__dirname + '/output.jpg', // 支持本地路径
   	type:'text',
 }).then(function (result) {
 	var endTime = (new Date()).getTime();
   	console.log(result.results.words.toString() + '\n');
   	console.log(endTime - startTime);
 }).catch(function (err) {
-  	console.log('err', err);
-})
+  	console.log('出错啦');
+});
