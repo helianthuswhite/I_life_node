@@ -1,7 +1,7 @@
 var net = require('net');  
   
-var HOST = '127.0.0.1';  
-var PORT = 13000;  
+var HOST = '10.221.64.154';  
+var PORT = 2333;  
   
 var client = new net.Socket();  
 client.connect(PORT, HOST, function() {  
@@ -18,7 +18,7 @@ client.on('data', function(data) {
   
     console.log('DATA: ' + data);  
     // 完全关闭连接  
-    client.destroy();  
+    client.destroy(); 
   
 });  
   
