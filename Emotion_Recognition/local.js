@@ -12,6 +12,7 @@ function recognize(img,key) {
             'Ocp-Apim-Subscription-Key':key
         }
     };
+    console.log(options);
     var req = https.request(options,function(res) {
         res.setEncoding('utf8');
         var data = '';
