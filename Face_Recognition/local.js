@@ -20,7 +20,27 @@ function recognize(img,key) {
         });
         res.on('end',function(){
             data = JSON.parse(data);
-            console.log(JSON.stringify(data,null,4));
+            // console.log(JSON.stringify(data,null,4));
+            // console.log(data[1]);
+            var gender = '';
+            var glasses = '';
+            var emoji = '';
+            if (data[1].faceAttributes.gender == 'male') {
+                gender = '男士';
+            }else {
+                gender = '女士';
+            }
+            if (data[1].faceAttributes.glasses != 'NoGlasses' ) {
+                glasses = '他戴着眼镜，';
+            }
+            if (data[1].faceAttributes.smile > 0.5) {
+                emoji = '看起来他笑的开心的。';
+            }else {
+                emoji = '看起来他好像不是那么开心。';
+            }
+            console.log('有' + data.length + '个人正在看着你，其中一个是看上去' 
+                + Math.floor(data[1].faceAttributes.age) + '左右的' + gender 
+                + '，' + glasses + emoji);
         });
     });
 
@@ -37,4 +57,4 @@ function start(imgPath,key) {
     });
 }
 
-start('/Users/W_littlewhite/Documents/Git/I_life_node/Emotion_Recognition/test.jpg','5cf998e7344e4045a9c2782e7e0d6499');
+start('/Users/W_littlewhite/Documents/Git/I_life_node/Face_Recognition/test.jpeg','5cf998e7344e4045a9c2782e7e0d6499');
