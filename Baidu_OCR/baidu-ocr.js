@@ -16,7 +16,7 @@ ocr.scan({
   	type:'text',
 }).then(function (result) {
 	var endTime = (new Date()).getTime();
-  	console.log(result.results.words.toString() + '\n');
+	console.log(result.results.words.toString().replace(/[^\u4e00-\u9fa5]/gi,""));
   	console.log(endTime - startTime);
 }).catch(function (err) {
   	console.log('出错啦');

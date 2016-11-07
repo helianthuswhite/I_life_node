@@ -1,0 +1,74 @@
+[
+    {
+        "faceRectangle": {
+            "top": 166,
+            "left": 551,
+            "width": 201,
+            "height": 201
+        },
+        "faceAttributes": {
+            "smile": 1,
+            "headPose": {
+                "pitch": 0,
+                "roll": -5.5,
+                "yaw": -4.6
+            },
+            "gender": "male",
+            "age": 28.7,
+            "facialHair": {
+                "moustache": 0.2,
+                "beard": 0.3,
+                "sideburns": 0
+            },
+            "glasses": "NoGlasses"
+        }
+    },
+    {
+        "faceRectangle": {
+            "top": 186,
+            "left": 169,
+            "width": 186,
+            "height": 186
+        },
+        "faceAttributes": {
+            "smile": 1,
+            "headPose": {
+                "pitch": 0,
+                "roll": 6.3,
+                "yaw": 4.9
+            },
+            "gender": "female",
+            "age": 33,
+            "facialHair": {
+                "moustache": 0,
+                "beard": 0,
+                "sideburns": 0
+            },
+            "glasses": "NoGlasses"
+        }
+    },
+    {
+        "faceRectangle": {
+            "top": 353,
+            "left": 416,
+            "width": 125,
+            "height": 125
+        },
+        "faceAttributes": {
+            "smile": 0,
+            "headPose": {
+                "pitch": 0,
+                "roll": 1.8,
+                "yaw": -3.8
+            },
+            "gender": "male",
+            "age": 0.8,
+            "facialHair": {
+                "moustache": 0,
+                "beard": 0,
+                "sideburns": 0
+            },
+            "glasses": "NoGlasses"
+        }
+    }
+]

@@ -20,7 +20,7 @@ function createServer(HOST,PORT) {
                 if (err) {
                     return console.error(err);
                 }
-                console.log('数据写入成功!');
+                sock.write('数据写入成功!');
             }); 
         });  
       
