@@ -4,8 +4,8 @@
 https://console.bce.baidu.com/iam/#/iam/accesslist
 
 **/
-var ak = '729162badbc5401ea84641dec32edc07';
-var sk = '98c544cfaa9c4a16bdee1cc0bccfcd33';
+var ak = 'ak';
+var sk = 'sk';
 var ocr = require('baidu-ocr-api').create(ak,sk);
 
 var startTime = (new Date()).getTime();
